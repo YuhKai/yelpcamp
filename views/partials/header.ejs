@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css">
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <title>YelpCamp</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
+      <a class="navbar-brand" href="/">YelpCamp</a>
+      <!-- 圖標(navbar-brand)放在切換按鈕上面就是在左邊 下面就是在右邊 -->
+      <!-- 切換按鈕 -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarCollapse"
+        aria-controls="navbarCollapse"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <!--aria-label給閱讀器看的 || aria-expanded="false" 閱讀器看的 預設不打開(配合class="collapse show" )||data-target 設定資料目標 || aria-controls 閱讀器看的
+        閱讀器可以直接導航到那個元件
+        -->
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- 列表 -->
+
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/campgrounds">Home</a>
+          </li>
+        </ul>
+
+            <form action="/campgrounds" method="GET" class="form-inline my-2 my-lg-0 mr-3" >
+              <input class="form-control mr-sm-2" type="text" name="search"   placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+      <ul class="navbar-nav">
+        <% if(!currentUser){ %> 
+        <li><a class="nav-link" href="/login">登入</a></li>
+        <li><a class="nav-link" href="/register">註冊</a></li>
+        <% }else{ %> 
+        <li><a class="nav-link" href="#">已登入 : <%= currentUser.username %></a></li>
+        <li><a class="nav-link" href="/logout">登出</a></li>
+        <% } %> 
+      </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <!-- error沒有東西的時候是空字串 -->
+      <% if (error && error.length>0) { %>  
+        
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <%= error %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times</span>  
+          <!-- 關閉的圖案(X)  -->
+        </button>
+        </div>
+      <% } %>
+      <% if (success && success.length>0) { %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <%= success %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+      <% } %>
+
+
+    </div>

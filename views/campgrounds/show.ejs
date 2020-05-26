@@ -1,0 +1,114 @@
+<%- include("../partials/header") %>
+
+
+<div class="container ">
+  <div class="row">
+    <div class="col-md-3">
+      <p class="lead font-weight-normal">YelpCamp</p>
+      
+      <div id="map"></div>
+    </div>
+    <div class="col-md-9">
+      <div class="card mb-3">
+        <img
+          class="card-img-top"
+          src="<%= campground.image %> "
+          alt="<%= campground.name %> "
+        />  
+        <div class="card-body">
+          <h5 class="float-right">$<%= campground.price %>/night</h5>
+          <h5 class="card-title font-weight-bold"><%= campground.name %></h5>
+          <p class="card-text"><%= campground.description %></p>
+          <p class="card-text"><em>由 : <%= campground.author.username %> 建立 , <%= moment(campground.createdAt).fromNow() %> </em></p>
+          <% if (currentUser && campground.author.id.equals(currentUser._id)) { %>
+            <div class="btn-group btn-group-sm" role="group"  >
+              <a
+                  href="/campgrounds/<%= campground._id %>/edit"
+                  class="btn btn-warning ">編輯
+              </a>
+              <form  class="btn-group" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
+                <button class="btn btn-danger btn-sm">刪除</button>
+              </form>
+            </div>
+          <% } %>
+
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body mb-3">
+          <div class="text-right">
+            <a
+              href="/campgrounds/<%= campground._id %>/comments/new "
+              class="btn btn-success">
+              加入評論
+            </a>
+          </div>
+          
+           <hr> 
+          <% campground.comments.forEach(comment => { %>
+            
+              <div class="row">
+                <div class="col-md-12 mb-2">
+                     <div class="float-right"><%= moment(comment.createdAt).fromNow() %> </div>
+                    <% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
+                    <span style="color: rgb(8, 118, 221);" aria-hidden="true"><i class="fas fa-user"></i></span>
+
+                    <% } else { %>
+                    <span   aria-hidden="true"><i class="fas fa-user"></i> </span>
+                    <% } %>
+                    <strong><%=  comment.author.username %></strong>
+                     <div class="card-text"><%=  comment.text %> </div>
+                  <% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
+                      <div class="btn-group btn-group-sm float-right " role="group"  >
+                        <a
+                            href="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit "
+                            class="btn btn-warning ">
+                            編輯
+                        </a>
+                        <form  class="btn-group" action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                          <button class="btn btn-danger btn-sm">刪除</button>
+                        </form>
+                      </div>
+                  <% } %> 
+                </div>
+              </div>
+              <hr>
+          <% }) %>
+       </div>
+     
+    </div>
+  </div>
+</div>
+</div>
+<script>
+  function initMap() {
+    var lat = <%= campground.lat %>;
+    var lng = <%= campground.lng %>;
+ 
+    var center = {lat: lat, lng: lng };
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 14,
+        center: center,
+        gestureHandling: 'cooperative' 
+    });
+    var contentString = `
+      <strong><%= campground.name %><br/>
+      <%= campground.location %></strong>
+      <p><%= campground.description %></p>
+    `
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+    var marker = new google.maps.Marker({
+        position: center,
+        map: map
+    });
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+  }
+</script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= process.env.GEOCODER_API_KEY %> &callback=initMap"></script>
+<%- include("../partials/footer") %>

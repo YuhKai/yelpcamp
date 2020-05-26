@@ -1,0 +1,40 @@
+body{
+  background-color: #000;
+  height:100%;
+  min-height: 100%;
+}
+
+#landing-header {
+  z-index: 1;
+  position: relative;
+  text-align: center;
+  padding-top: 40vh;
+  pointer-events: none;
+  
+}
+#viewcamp{
+  pointer-events: auto;
+}
+#landing-header h1 {
+  color: #fff;
+}
+
+
+#carouselExampleFade{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+}
+
+
+img {
+  /* 100% view height; */
+ height: 100vh;
+
+}

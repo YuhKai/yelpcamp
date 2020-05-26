@@ -1,0 +1,36 @@
+<%- include("../partials/header")  %> 
+
+<div class="container">
+  <div class="row">
+     <div class="text-center col-md-12 ">
+       <h1>編輯 <%= campground.name %> </h1>
+     </div>
+    <div style="width: 30%; margin: 20px auto;">
+      <form action="/campgrounds/<%= campground._id %>?_method=PUT " method="POST">
+        <div class="form-group">
+          <input class="form-control" type="text" name="editCamp[name]" placeholder="名子" value="<%= campground.name %> ">
+        </div>
+        <div class="form-group">
+          <input class="form-control" type="number" name="editCamp[price]" value="<%= campground.price %>" placeholder="價格">
+        </div>
+        <div class="form-group">
+          <input class="form-control" type="text" name="editCamp[image]" placeholder="圖片網址" value="<%= campground.image %> ">
+        </div>
+        <div class="form-group">
+          <input class="form-control" type="text" name="editCamp[description]" placeholder="描述" value="<%= campground.description %> ">
+        </div>
+        <div class="form-group">
+          <input class="form-control" type="text" name="editCamp[location]" placeholder="地點" value="<%= campground.location %> ">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-lg btn-primary btn-block">送出編輯</button>
+        </div>
+      </form>
+           <a href="/campgrounds">返回</a>
+
+    </div>
+  
+  </div>
+
+</div>
+<%- include("../partials/footer")  %> 

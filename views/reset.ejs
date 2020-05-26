@@ -1,0 +1,24 @@
+<%- include("partials/header")  %> 
+
+<div class="container">
+     
+       <form action="/reset/<%= token %> " method="POST">
+        <legend>重置密碼</legend>
+        <hr/>
+        <div class="form-group">
+          <label for="password" class="h5">新密碼</label>
+          <input type="password" name="password" autofocus placeholder="新密碼" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="confirm" class="h5">確認新密碼</label>
+          <input type="password" name="confirm" autofocus placeholder="確認新密碼" class="form-control">
+        </div>
+        
+          <input type="submit" class="btn btn-primary" value="重置密碼">
+         
+      </form>
+ 
+</div>
+   
+
+<%- include("partials/footer")  %> 

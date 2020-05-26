@@ -1,0 +1,27 @@
+<%- include("../partials/header")  %> 
+
+
+<div class="container">
+  <div class="row">
+     <div class="text-center col-md-12 ">
+       <h1>編輯評論</h1>
+     </div>
+    <div style="width: 30%; margin: 20px auto;">
+      <form action="/campgrounds/<%= campground_id %>/comments/<%= comment._id %>?_method=PUT " method="POST">
+        <div class="form-group">
+          <input class="form-control" type="text" name="comment[text]" value="<%= comment.text %> ">
+        </div>
+
+       
+        <div class="form-group">
+          <button type="submit" class="btn btn-lg btn-primary btn-block">送出</button>
+        </div>
+      </form>
+           <a href="/campgrounds">返回</a>
+
+    </div>
+  
+  </div>
+
+</div>
+<%- include("../partials/footer")  %> 
