@@ -16,10 +16,10 @@
           alt="<%= campground.name %> "
         />  
         <div class="card-body">
-          <h5 class="float-right">$<%= campground.price %>/night</h5>
+          <h5 class="float-right">$<%= campground.price %>/一晚</h5>
           <h5 class="card-title font-weight-bold"><%= campground.name %></h5>
           <p class="card-text"><%= campground.description %></p>
-          <p class="card-text"><em>由 : <%= campground.author.username %> 建立 , <%= moment(campground.createdAt).fromNow() %> </em></p>
+          <p class="card-text"><em>由 : <%= campground.author.username %> 建立 , <%= moment(campground.createdAt).locale('zh-tw').fromNow() %> </em></p>
           <% if (currentUser && campground.author.id.equals(currentUser._id)) { %>
             <div class="btn-group btn-group-sm" role="group"  >
               <a
@@ -50,7 +50,7 @@
             
               <div class="row">
                 <div class="col-md-12 mb-2">
-                     <div class="float-right"><%= moment(comment.createdAt).fromNow() %> </div>
+                     <div class="float-right"><%= moment(comment.createdAt).locale('zh-tw').fromNow() %> </div>
                     <% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
                     <span style="color: rgb(8, 118, 221);" aria-hidden="true"><i class="fas fa-user"></i></span>
 
