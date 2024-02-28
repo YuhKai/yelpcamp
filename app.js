@@ -22,10 +22,7 @@ app.locals.moment = require("moment");
 const url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp";
 mongoose
   .connect(url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true,
+
   })
   .then(() => {
     console.log("connect to DB");
