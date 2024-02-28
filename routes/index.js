@@ -53,10 +53,19 @@ router.post(
 );
 
 //登出
-router.get("/logout", function (req, res) {
-  req.logout();
-  req.flash("success","你已經登出");
-  res.redirect("/campgrounds");
+// router.get("/logout", function (req, res) {
+//   req.logout();
+//   req.flash("success","你已經登出");
+//   res.redirect("/campgrounds");
+// });
+router.get("/logout", function (req, res, next) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    req.flash("success", "你已經登出");
+    res.redirect("/campgrounds");
+  });
 });
 //忘記密碼
 router.get("/forgot",function(req,res){
